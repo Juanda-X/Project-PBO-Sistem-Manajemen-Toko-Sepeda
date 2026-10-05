@@ -81,7 +81,7 @@ public class Sepeda {
         System.out.println("Nama Sepeda: " + nama);
         System.out.println("Merk: " + merk);
         System.out.printf("Harga: Rp. " + formatRupiah.format(harga));
-        System.out.println("Stok: " + stok);
+        System.out.println("\nStok: " + stok);
     }
 
 }
