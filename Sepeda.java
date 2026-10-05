@@ -75,7 +75,7 @@ public class Sepeda {
     public void tampilkanInfo() {
         System.out.println("Nama Sepeda: " + nama);
         System.out.println("Merk: " + merk);
-        System.out.println("Harga: Rp." +  harga);
+        System.out.printf("Harga: Rp. %.0f\n",  harga);
         System.out.println("Stok: " + stok);
     }
 

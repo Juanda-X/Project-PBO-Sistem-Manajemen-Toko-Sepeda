@@ -16,7 +16,7 @@ public void tampilkanInfo() {
     System.out.println("Jenis: Sepeda Gunung (MTB)");
     System.out.println("Nama Sepeda: " + getNama());
     System.out.println("Merk: " + getMerk());
-    System.out.println("Harga: Rp. " + getHarga());
+    System.out.printf("Harga: Rp. %.f0\n", getHarga());
     System.out.println("Stok Tersedia: " + getStok());
     System.out.println("Ukuran Roda: " + ukuranRoda);
     System.out.println("Jenis Suspensi: " + jenisSuspensi);
