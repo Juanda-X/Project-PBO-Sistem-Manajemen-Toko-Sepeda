@@ -11,11 +11,8 @@ public class sepedaBalap extends Sepeda {
     }
 @Override
     public void tampilkanInfo() {
-        System.out.println("Jenis: Sepeda Balap (Road Bike / Fixie)");
-        System.out.println("Nama Sepeda: " + getNama());
-        System.out.println("Merk: " + getMerk());
-        System.out.printf("Harga: Rp. %.0f\n", getHarga());
-        System.out.println("Stok Tersedia: " + getStok());
+        super.tampilkanInfo();
+
         System.out.println("Ukuran Frame: " + ukuranFrame);
         System.out.println("Jumlah Gear: " + jumlahGear);
     }

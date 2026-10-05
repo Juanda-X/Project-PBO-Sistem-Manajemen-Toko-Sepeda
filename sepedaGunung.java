@@ -13,11 +13,8 @@ public class sepedaGunung extends Sepeda {
 
 @Override
 public void tampilkanInfo() {
-    System.out.println("Jenis: Sepeda Gunung (MTB)");
-    System.out.println("Nama Sepeda: " + getNama());
-    System.out.println("Merk: " + getMerk());
-    System.out.printf("Harga: Rp. %.f0\n", getHarga());
-    System.out.println("Stok Tersedia: " + getStok());
+    super.tampilkanInfo();
+
     System.out.println("Ukuran Roda: " + ukuranRoda);
     System.out.println("Jenis Suspensi: " + jenisSuspensi);
 

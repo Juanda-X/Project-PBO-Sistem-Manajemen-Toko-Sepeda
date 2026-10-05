@@ -1,10 +1,18 @@
 import java.util.Scanner;
 
 public class tokoSepeda {
+
+    // Method pembelian sepeda dengan parameter Superclass Sepeda
+    public static void prosesPembelian(Sepeda sepeda) {
+        System.out.println(" === Proses Pembelian Sepeda === ");
+        sepeda.tampilkanInfo();
+        System.out.println("\nPembellian Sepeda " + sepeda.getNama() + " berhasil dilakukan dan akan segera diposes. Terimakasih sudah berbelanja di toko Sepeda FIXFIX.");
+    }
+
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
 
-        Sepeda[] sepeda = new Sepeda[99];
+        Sepeda[] sepeda = new Sepeda[999];
 
         int jumlahSepeda = 0;
         boolean running = true;
@@ -18,8 +26,9 @@ public class tokoSepeda {
             System.out.println("1. Tambah Sepeda");
             System.out.println("2. Tampilkan Semua Sepeda yang Tersedia");
             System.out.println("3. Cari Sepeda");
-            System.out.println("4. Keluar");
-            System.out.print("Pilih menu (1-4): ");
+            System.out.println("4. Proses Pembelian");
+            System.out.println("5. Keluar");
+            System.out.print("Pilih menu (1-5): ");
 
             int pilihan = input.nextInt();
             input.nextLine();
@@ -105,6 +114,7 @@ public class tokoSepeda {
                     } else {
                         System.out.println("=== Daftar Sepeda yang Tersedia ===");
 
+                        // Dinamic Binding Polymorphism
                         for (int i = 0; i < jumlahSepeda; i++) {
                             System.out.println("\nSepeda ke-" + (i + 1));
                             sepeda[i].tampilkanInfo();
@@ -137,6 +147,29 @@ public class tokoSepeda {
                     break;
 
                 case 4:
+                    if (jumlahSepeda == 0) {
+                        System.out.println("Belum ada sepeda yang tersedia.");
+                    } else {
+                        System.out.println("=== Pilih Sepeda yang Ingin Dibeli ===");
+                        
+                        for (int i = 0; i < jumlahSepeda; i++) {
+                            System.out.println((i + 1) + ". " + sepeda[i].getNama() + " (Merk: " + sepeda[i].getMerk() + ")");
+                        }
+
+                        System.out.print("Pilih nomor sepeda yang ingin dibeli: ");
+                        int nomorSepeda = input.nextInt();
+                        input.nextLine();
+
+                        if (nomorSepeda >= 1 && nomorSepeda <= jumlahSepeda) {
+                            prosesPembelian(sepeda[nomorSepeda - 1]);
+                        } else {
+                            System.out.println("Nomor sepeda tidak valid.");
+                        }
+
+                    }
+                    break;
+
+                case 5:
                     running = false;
 
                     System.out.println("=== Terimakasih Sudah Menggunakan Sistem Toko Sepeda FIXFIX ===");

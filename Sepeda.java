@@ -1,3 +1,6 @@
+import java.text.NumberFormat;
+import java.util.Locale;
+
 public class Sepeda {
     private String nama;
     private String merk;
@@ -73,9 +76,11 @@ public class Sepeda {
 
 // Override Oleh Subclass
     public void tampilkanInfo() {
+        NumberFormat formatRupiah = NumberFormat.getNumberInstance(new Locale("id", "ID"));
+
         System.out.println("Nama Sepeda: " + nama);
         System.out.println("Merk: " + merk);
-        System.out.printf("Harga: Rp. %.0f\n",  harga);
+        System.out.printf("Harga: Rp. " + formatRupiah.format(harga));
         System.out.println("Stok: " + stok);
     }
 
