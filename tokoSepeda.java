@@ -3,10 +3,55 @@ import java.util.Scanner;
 public class tokoSepeda {
 
     // Method pembelian sepeda dengan parameter Superclass Sepeda
-    public static void prosesPembelian(Sepeda sepeda) {
+    public static boolean prosesPembelianOffline(Sepeda sepeda, int jumlahSepedaDibeli) {
+        if (!sepeda.kurangiStok(jumlahSepedaDibeli)) {
+            System.out.println("Proses Pembelian sepeda gagal! Jumlah pembelian tidak valid atau stok tidak mencukupi.");
+            return false;
+        }
+
         System.out.println(" === Proses Pembelian Sepeda === ");
         sepeda.tampilkanInfo();
-        System.out.println("\nPembellian Sepeda " + sepeda.getNama() + " berhasil dilakukan dan akan segera diposes. Terimakasih sudah berbelanja di toko Sepeda FIXFIX.");
+
+        System.out.println("\nPembellian Sepeda " + sepeda.getNama() 
+        + " sebanyak "+ jumlahSepedaDibeli + " unit" 
+        + ", berhasil dilakukan dan akan segera diposes. Terimakasih sudah berbelanja di toko Sepeda FIXFIX.");
+        return true;
+    }
+
+    public static boolean prosesPembelianOnline(Sepeda sepeda, String alamatPengiriman, int jumlahSepedaDibeli) {
+        if (alamatPengiriman == null || alamatPengiriman.trim().isEmpty()) {
+            System.out.println("Proses pembelian gagal! Alamat pengiriman harus diisi.");
+            return false;
+        }
+
+        if (!sepeda.kurangiStok(jumlahSepedaDibeli)) {
+            System.out.println("Proses Pembelian sepeda gagal! Jumlah pembelian tidak valid atau stok tidak mencukupi.");
+            return false;
+        }
+
+        System.out.println(" === Proses Pembelian Sepeda Online === ");
+        sepeda.tampilkanInfo();
+
+        System.out.println("\nPembelian Sepeda " + sepeda.getNama()
+         + " sebanyak " + jumlahSepedaDibeli +" unit" + ", berhasil dilakukan dan akan segera dikirim ke alamat: " 
+         + alamatPengiriman + ". Terimakasih sudah berbelanja di toko Sepeda FIXFIX.");
+         return true;
+    }
+
+    // Jika stok habis, item dihapus dari system
+    public static int hapusSepeda(Sepeda[] sepeda, int jumlahSepeda, int indeks) {
+        if (sepeda[indeks].getStok() == 0) {
+            System.out.println("Stok sepeda habis. " + sepeda[indeks].getNama() + " dihapus dari system.");
+
+            // geser data ke posisi sebelumnya
+            for (int i = indeks; i < jumlahSepeda - 1; i++) {
+                sepeda[i] = sepeda[i + 1];
+            }
+            sepeda[jumlahSepeda - 1] = null;
+            jumlahSepeda--;
+        }
+
+        return jumlahSepeda;
     }
 
     public static void main(String[] args) {
@@ -27,8 +72,9 @@ public class tokoSepeda {
             System.out.println("2. Tampilkan Semua Sepeda yang Tersedia");
             System.out.println("3. Cari Sepeda");
             System.out.println("4. Proses Pembelian");
-            System.out.println("5. Keluar");
-            System.out.print("Pilih menu (1-5): ");
+            System.out.println("5. Proses Pembelian Online");
+            System.out.println("6. Keluar");
+            System.out.print("Pilih menu (1-6): ");
 
             int pilihan = input.nextInt();
             input.nextLine();
@@ -153,7 +199,7 @@ public class tokoSepeda {
                         System.out.println("=== Pilih Sepeda yang Ingin Dibeli ===");
                         
                         for (int i = 0; i < jumlahSepeda; i++) {
-                            System.out.println((i + 1) + ". " + sepeda[i].getNama() + " (Merk: " + sepeda[i].getMerk() + ")");
+                            System.out.println((i + 1) + ". " + sepeda[i].getNama() + " (Stok: " + sepeda[i].getStok() + ")");
                         }
 
                         System.out.print("Pilih nomor sepeda yang ingin dibeli: ");
@@ -161,15 +207,58 @@ public class tokoSepeda {
                         input.nextLine();
 
                         if (nomorSepeda >= 1 && nomorSepeda <= jumlahSepeda) {
-                            prosesPembelian(sepeda[nomorSepeda - 1]);
+                            int indeks = nomorSepeda - 1;
+
+                            System.out.print("Masukkan jumlah sepeda yang ingin dibeli: ");
+                            int jumlahSepedaDibeli = input.nextInt();
+                            input.nextLine();
+
+                            if (prosesPembelianOffline(sepeda[indeks], jumlahSepedaDibeli)) {
+                                jumlahSepeda = hapusSepeda(sepeda, jumlahSepeda, indeks);
+                            }
+
                         } else {
+                            input.nextLine();
                             System.out.println("Nomor sepeda tidak valid.");
                         }
-
                     }
                     break;
 
                 case 5:
+                    if (jumlahSepeda == 0) {
+                        System.out.println("Belum ada sepeda yang  tersedia.");
+                    } else {
+                        System.out.println("=== Pilih Sepeda yang igin diproses ===");
+
+                        for (int i = 0; i < jumlahSepeda; i++) {
+                            System.out.println((i + 1) + ". " + sepeda[i].getNama() + " (Stok: " + sepeda[i].getStok() + ")");
+                        }
+
+                        System.out.print("Pilih nomor sepeda: ");
+                        int nomorSepeda = input.nextInt();
+                        input.nextLine();
+
+                        if (nomorSepeda >= 0 && nomorSepeda <= jumlahSepeda) {
+                            int indeks = nomorSepeda - 1;
+
+                            System.out.print("Masukkan alamat pengiriman: ");
+                            String alamatPengiriman = input.nextLine();
+
+                            System.out.print("Masukkan jumlah sepeda: ");
+                            int jumlahSepedaDibeli = input.nextInt();
+                            input.nextLine();
+
+                            if (prosesPembelianOnline(sepeda[indeks], alamatPengiriman, jumlahSepedaDibeli)) {
+                                jumlahSepeda = hapusSepeda(sepeda, jumlahSepeda, indeks);
+                            }
+
+                        } else {
+                            System.out.println("Nomor sepeda tidak valid.");
+                        }
+                    }
+                    break;
+
+                case 6:
                     running = false;
 
                     System.out.println("=== Terimakasih Sudah Menggunakan Sistem Toko Sepeda FIXFIX ===");

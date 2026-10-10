@@ -84,4 +84,13 @@ public class Sepeda {
         System.out.println("\nStok: " + stok);
     }
 
+    public boolean kurangiStok(int jumlah) {
+        if(jumlah <= 0 || jumlah > stok) {
+            return false;
+        } 
+
+        stok -= jumlah;
+        return true;
+    }
+
 }
