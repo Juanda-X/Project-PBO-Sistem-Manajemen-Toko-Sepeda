@@ -12,7 +12,7 @@ public class tokoSepeda {
         System.out.println(" === Proses Pembelian Sepeda === ");
         sepeda.tampilkanInfo();
 
-        System.out.println("\nPembellian Sepeda " + sepeda.getNama() 
+        System.out.println("\nPembelian Sepeda " + sepeda.getNama() 
         + " sebanyak "+ jumlahSepedaDibeli + " unit" 
         + ", berhasil dilakukan dan akan segera diposes. Terimakasih sudah berbelanja di toko Sepeda FIXFIX.");
         return true;
