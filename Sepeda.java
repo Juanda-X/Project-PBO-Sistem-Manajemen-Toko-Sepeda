@@ -1,7 +1,7 @@
 import java.text.NumberFormat;
 import java.util.Locale;
 
-public class Sepeda {
+public abstract class Sepeda {
     private String nama;
     private String merk;
     private double harga;
@@ -92,5 +92,7 @@ public class Sepeda {
         stok -= jumlah;
         return true;
     }
+
+    public abstract void panduanPerawatan();
 
 }

@@ -164,6 +164,19 @@ public class tokoSepeda {
                         for (int i = 0; i < jumlahSepeda; i++) {
                             System.out.println("\nSepeda ke-" + (i + 1));
                             sepeda[i].tampilkanInfo();
+
+                            sepeda[i].panduanPerawatan();
+
+                            if (sepeda[i] instanceof servis) {
+                                servis itemDiservis = (servis) sepeda[i];
+                                itemDiservis.servisRutin();
+                            }
+
+                            if (sepeda[i] instanceof ujiCoba) {
+                                ujiCoba itemUjiCoba = (ujiCoba) sepeda[i];
+                                itemUjiCoba.ujiCobaLintasan();
+                            }
+                        
                         }
                     }
                     break;

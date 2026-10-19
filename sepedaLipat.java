@@ -1,4 +1,4 @@
-public class sepedaLipat extends Sepeda{
+public class sepedaLipat extends Sepeda implements ujiCoba{
     private int ukuranRoda;
     private String mekanismeLipat;
 
@@ -15,5 +15,15 @@ public class sepedaLipat extends Sepeda{
         System.out.println("Ukuran Roda: " + ukuranRoda);
         System.out.println("Mekanisme Lipat: " + mekanismeLipat);
     }
+
+@Override 
+public void panduanPerawatan() {
+    System.out.println("Panduan perawatan: Berikan pelumas pada engsel sepeda lipat secara berkala");
+}
+
+@Override 
+public void ujiCobaLintasan() {
+    System.out.println("Uji Coba: Uji pada mekanisme buka tutup pada sepeda lipat.");
+}
 
 }

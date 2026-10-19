@@ -1,4 +1,4 @@
-public class sepedaGunung extends Sepeda {
+public class sepedaGunung extends Sepeda implements servis {
     private int ukuranRoda;
     private String jenisSuspensi;
 
@@ -19,5 +19,15 @@ public void tampilkanInfo() {
     System.out.println("Jenis Suspensi: " + jenisSuspensi);
 
     }
+
+@Override 
+public void panduanPerawatan() {
+    System.out.println("Panduan Perawatan: Bersihkan suspensi, crank, dan gear setelah digunakan di medan berlumpur");
+}
+
+@Override 
+public void servisRutin() {
+    System.out.println("Servis: Pengecekan tekanan suspensi hidrolik.");
+}
 
 }
